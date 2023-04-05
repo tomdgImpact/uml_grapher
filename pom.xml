@@ -36,6 +36,11 @@
             <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>info.picocli</groupId>
+            <artifactId>picocli</artifactId>
+            <version>4.7.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -55,6 +60,11 @@
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>info.picocli</groupId>
+                    <artifactId>picocli</artifactId>
+                    <version>4.7.1</version>
                 </plugin>
             </plugins>
         </pluginManagement>
