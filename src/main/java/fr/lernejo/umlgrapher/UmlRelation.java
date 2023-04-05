@@ -1,5 +1,7 @@
 package fr.lernejo.umlgrapher;
 
+import java.util.List;
+
 public class UmlRelation {
     private final String [] interfaceParente;
     public UmlRelation(GraphRepresentation graphRepresentation){
@@ -7,11 +9,11 @@ public class UmlRelation {
     }
 
     public String[] getInterfaceParentes(GraphRepresentation graphRepresentation){
-        String[] output = new String[graphRepresentation.getInterfaces().length];
-        if(graphRepresentation.getInterfaces() != null && graphRepresentation.getInterfaces().length >0){
-            Class [] result = graphRepresentation.getInterfaces();
-            for (int i=0; i< graphRepresentation.getInterfaces().length; i++)
-                output[i] = result[i].getSimpleName();
+        String[] output = new String[graphRepresentation.getInterfaces().size()];
+        if(graphRepresentation.getInterfaces() != null && graphRepresentation.getInterfaces().size() >0){
+            List<Class<?>> result = graphRepresentation.getInterfaces();
+            for (int i=0; i< graphRepresentation.getInterfaces().size(); i++)
+                output[i] = result.get(i).getSimpleName();
         }
         return output;
     }
