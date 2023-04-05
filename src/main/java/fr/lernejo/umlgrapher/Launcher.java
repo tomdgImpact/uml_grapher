@@ -1,31 +1,25 @@
 package fr.lernejo.umlgrapher;
-
 import picocli.CommandLine;
+import picocli.CommandLine.Option;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
+public class Launcher implements Runnable {
+    @Option(names = { "-c", "--classes"}, required = true, description = "Give Class")
+    private final Class[] Classrecept = null;
 
-@CommandLine.Command(name = "Mermaid Graph", mixinStandardHelpOptions = true, version = "Graph 1.0",
-    description = "Trying to build mermaid graph")
-
-public class Launcher implements Callable<Integer> {
-    @CommandLine.Option(names = {"-c", "--classes"}, required = true, description = "Precise the classe where to build graph")
-    private final List<Class<?>> className = new ArrayList<>();
-
-    @CommandLine.Option(names = {"-g", "--graph-type"}, description = "Precise graph type to build, default is Mermaid",
-        defaultValue = "Mermaid")
-    private final GraphType type = GraphType.Mermaid;
-
-    public static void main(String[] args) {
-        int exitCode = new CommandLine(new Launcher()).execute(args);
-        System.exit(exitCode);
-    }
+    @Option(names = { "-g", "--graph-type" }, description = "Give type of graph")
+    private final GraphType typeofgraph = GraphType.Mermaid;
 
     @Override
-    public Integer call() throws Exception {
-        UmlGraph umlGraph = new UmlGraph(className);
-        System.out.println(umlGraph.as(type));
-        return 0;
+    public void run() {
+        UmlGraph graphrun  = new UmlGraph(Classrecept);
+        String result = graphrun.as(typeofgraph);
+        System.out.println(result);
     }
+    public static void main(String... args) {
+        int exitCode = new CommandLine(new Launcher()).execute(args);
+        System.exit(exitCode);
+        //CommandLine.usage(new Launcher(),System.out);
+    }
+
 }
+

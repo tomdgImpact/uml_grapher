@@ -1,24 +1,25 @@
 package fr.lernejo.umlgrapher;
 
-import java.util.List;
+import java.util.Set;
 
 public class UmlRelation {
-    private final String [] interfaceParente;
-    public UmlRelation(GraphRepresentation graphRepresentation){
-        this.interfaceParente = this.getInterfaceParentes(graphRepresentation);
+    private final Set<UmlType> namerelation;
+    public UmlRelation(Set<UmlType> namerelation) {
+        this.namerelation = namerelation;
     }
-
-    public String[] getInterfaceParentes(GraphRepresentation graphRepresentation){
-        String[] output = new String[graphRepresentation.getInterfaces().size()];
-        if(graphRepresentation.getInterfaces() != null && graphRepresentation.getInterfaces().size() >0){
-            List<Class<?>> result = graphRepresentation.getInterfaces();
-            for (int i=0; i< graphRepresentation.getInterfaces().size(); i++)
-                output[i] = result.get(i).getSimpleName();
+    public String Relationformat(){
+        String relationformat = "";
+        for(UmlType graphname: namerelation)
+        {
+            Class[] obtainInterface = graphname.classname().getInterfaces();
+            for(Class relationame: obtainInterface)
+                if (graphname.classname().getSuperclass() == null) {
+                    relationformat += relationame.getSimpleName() + " <|-- " + graphname.classname().getSimpleName()+" : extends\n";
+                }
+                else {
+                    relationformat += relationame.getSimpleName()+ " <|.. " + graphname.classname().getSimpleName()+" : implements\n";
+                }
         }
-        return output;
-    }
-
-    public String[] getInterfaceParente() {
-        return interfaceParente;
+        return relationformat;
     }
 }

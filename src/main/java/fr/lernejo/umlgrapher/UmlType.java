@@ -1,20 +1,27 @@
 package fr.lernejo.umlgrapher;
 
-import java.lang.reflect.Modifier;
-
 public class UmlType {
-    private final String type ;
+    private final String Name;
+    private final String NamePackage;
 
-    public  UmlType(Class<?> aClass){
-        String type1="";
-        if(Modifier.isInterface(aClass.getModifiers())){
-            type1 = "<<interface>>";
-        }
+    private final Class classname;
 
-        this.type = type1;
+    public UmlType(Class giveclass){
+        this.Name = giveclass.getSimpleName();
+        this.NamePackage = giveclass.getPackageName();
+        this.classname = giveclass;
+
     }
 
-    public String type() {
-        return this.type;
+
+    public String name() {
+        return this.Name;
     }
+    public String packageName(){
+        return this.NamePackage;
+    }
+
+    public Class classname(){return this.classname;}
+
+
 }
